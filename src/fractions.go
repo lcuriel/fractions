@@ -5,7 +5,6 @@ import (
 	"os"
 	"strings"
 	"strconv"
-	"flag"
 )
 
 func main() {
