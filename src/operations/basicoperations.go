@@ -1,8 +1,8 @@
-package basicoperations
+package operations
 
 type BasicOperations struct {
-	numerator int
-	denominator int
+	Numerator int
+	Denominator int
 }
 
 func (bo BasicOperations) multiplication(element1, element2 string) string {

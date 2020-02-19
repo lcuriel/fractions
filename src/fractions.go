@@ -2,36 +2,42 @@ package main
 
 import (
 	"fmt"
+	"fractions/src/operations"
+	_ "fractions/src/operations"
 	"os"
+	/*
 	"strings"
 	"strconv"
 	"reflect"
-	fo "fractions/src/fractionsoperations"
+	 */
 )
 
 func main() {
 	operationArg := os.Args
-	var fos fractionsoperations.FractionsOperations
-	fmt.Println("VALIDATE",   )
+	fractionsOperations := new(operations.FractionsOperations)
 
-
-
-
-
-
-
-
-
-
-	fmt.Println("MIERDA", args);
-	fmt.Println("---");
-	fmt.Println("TYPE MIERDA", reflect.TypeOf(args))
-	fmt.Println("SIZE MIERDA", len(args))
-
-	args = strings.Split(args[1], " ")
-	for i:=0; i< len(args); i++ {
- 		fmt.Println("VALUE " + strconv.Itoa(i) + " => ", args[i])
+	if len(operationArg) > 1 && fractionsOperations.IsValid(operationArg[1]){
+			fmt.Println("VALIDATE")
+	} else {
+		fmt.Println("Specify a valid operation to be evaluated")
 	}
-	fmt.Println("COMPLETE => ", args)
 
+
+
+
+
+
+
+/*
+	fmt.Println("MIERDA", operationArg);
+	fmt.Println("---");
+	fmt.Println("TYPE MIERDA", reflect.TypeOf(operationArg))
+	fmt.Println("SIZE MIERDA", len(operationArg))
+
+	operationArg = strings.Split(operationArg[1], " ")
+	for i:=0; i< len(operationArg); i++ {
+ 		fmt.Println("VALUE " + strconv.Itoa(i) + " => ", operationArg[i])
+	}
+	fmt.Println("COMPLETE => ", operationArg)
+*/
 }
