@@ -16,10 +16,17 @@ func main() {
 	operationArg := os.Args
 	fractionsOperations := new(operations.FractionsOperations)
 
-	if len(operationArg) > 1 && fractionsOperations.IsValid(operationArg[1]){
-			fmt.Println("VALIDATE")
+	if len(operationArg) > 1 {
+		operation := fractionsOperations.CleanString(operationArg[1])
+		operationArg = nil
+		if  fractionsOperations.IsValid(operation){
+			result := fractionsOperations.Execute(operation);
+			fractionsOperations.DisplayResult(result)
+		} else {
+			fmt.Println("Specify a valid operation to be evaluated")
+		}
 	} else {
-		fmt.Println("Specify a valid operation to be evaluated")
+		fmt.Println("Enter an operation")
 	}
 
 
