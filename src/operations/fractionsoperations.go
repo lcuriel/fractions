@@ -21,7 +21,6 @@ func (f *FractionsOperations) IsValid(operation string) bool {
 		expression := `^(([1-9]\d*\_)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*))(\s(\*|\/|\+|\-)\s(([1-9]\d*\_)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*)))*$`
 		rsEvaluator, _ := regexp.Compile(expression)
 		band = rsEvaluator.MatchString(operation)
-		fmt.Println("PATRON: ", band)
 	}
 	return band
 }
@@ -41,13 +40,8 @@ func (f FractionsOperations) CleanString(operation string) string{
 func (f FractionsOperations) Execute(operation string) string{
 	result := ""
 	f.elements = strings.Split(operation, " ")
-
 	operators := [4]string{"*", "/", "+", "-"}
 	for i:=0; i< len(operators); i++{
-		/*
-		fmt.Println("OPERATOR: ", operators[i])
-		fmt.Println("=========================")
-		 */
 		for {
 			indexOperator := f.indexOf(f.elements, operators[i])
 			if indexOperator >= 0 {
@@ -57,14 +51,11 @@ func (f FractionsOperations) Execute(operation string) string{
 			}
 			break
 		}
-		i = len(operators)
 	}
 	return "execute"
 }
 
 func (f FractionsOperations) getElements(indexOperator int) (string, string) {
-	fmt.Println("ELEMENTS: ", f.elements)
-	fmt.Println("indexOperator: ", indexOperator)
 	e1 := f.elements[indexOperator-1]
 	e2 := f.elements[indexOperator+1]
 	return e1, e2
@@ -75,6 +66,7 @@ func (f FractionsOperations) doOperation(operator string, element1 string, eleme
 	var result string
 	element1 = bo.IntegerToFraction(element1)
 	element2 = bo.IntegerToFraction(element2)
+
 	switch operator{
 		case "*":
 			result = bo.Multiplication(element1, element2)
@@ -85,6 +77,46 @@ func (f FractionsOperations) doOperation(operator string, element1 string, eleme
 		case "-":
 			result = bo.Subtraction(element1, element2)
 	}
+	fmt.Println("ELEMENT1: ", element1)
+	fmt.Println("OPERATOR: ", operator)
+	fmt.Println("ELEMENT2: ", element2)
+	fmt.Println("RESULT: ", result)
+	fmt.Println("REDUCED: ", bo.Reduce(result))
+	fmt.Println("--------------------------------------------------------------------------------")
+	fmt.Println("--------------------------------------------------------------------------------")
+	fmt.Println("--------------------------------------------------------------------------------")
+	temp := ""
+	temp = "128/128"
+	fmt.Println(temp + ": ", bo.Reduce(temp))
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	temp = "512/32"
+	fmt.Println(temp + ": ", bo.Reduce(temp))
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	temp = "544/128"
+	fmt.Println(temp + ": ", bo.Reduce(temp))
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	temp = "480/128"
+	fmt.Println(temp + ": ", bo.Reduce(temp))
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	temp = "3/4"
+	fmt.Println(temp + ": ", bo.Reduce(temp))
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	temp = "9/12"
+	fmt.Println(temp + ": ", bo.Reduce(temp))
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+	fmt.Println("********************************************************************************")
+
 	return result
 }
 
