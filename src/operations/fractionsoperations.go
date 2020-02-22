@@ -1,7 +1,6 @@
 package operations
 
 import (
-	"fmt"
 	"regexp"
 	"strings"
 	_ "reflect"
@@ -37,7 +36,6 @@ func (f FractionsOperations) CleanString(operation string) string{
 	return operation
 }
 
-
 func (f FractionsOperations) Execute(operation string) string{
 	result := ""
 	f.elements = strings.Split(operation, " ")
@@ -45,7 +43,6 @@ func (f FractionsOperations) Execute(operation string) string{
 	if len(f.elements)==1 {
 		result = bo.IntegerToFraction(f.elements[0])
 		result = bo.Reduce(result)
-		fmt.Println("REDUCED: ", result)
 	} else {
 		operators := [4]string{"*", "/", "+", "-"}
 		for i:=0; i< len(operators); i++{
@@ -55,7 +52,7 @@ func (f FractionsOperations) Execute(operation string) string{
 				if indexOperator >= 0 {
 					element1, element2 := f.getElements(indexOperator)
 					result = f.doOperation(operators[i], element1, element2)
-					f.newArray(indexOperator, result)
+					f.newArray(indexOperator, bo.Reduce(result))
 				} else {
 					break
 				}
@@ -63,7 +60,7 @@ func (f FractionsOperations) Execute(operation string) string{
 		}
 		result = f.elements[0]
 	}
-	return bo.Reduce(result)
+	return result
 }
 
 func (f FractionsOperations) getElements(indexOperator int) (string, string) {
@@ -100,17 +97,8 @@ func (f FractionsOperations) indexOf(vs []string, t string) int {
 }
 
 func (f FractionsOperations) newEntryLog(){
-	/*
-	lastPosition := len(f.tracking)
-	f.tracking[lastPosition] = strings.Join(f.elements, " ")
-	*/
 }
-/*
- ===================================================================================================
- ===================================================================================================
- ===================================================================================================
- ===================================================================================================
- */
+
 func (f *FractionsOperations) newArray(indexOperator int, neElement string) {
 	indexOperatorM1 := indexOperator - 1
 	indexOperatorP1 := indexOperator + 1
@@ -118,28 +106,3 @@ func (f *FractionsOperations) newArray(indexOperator int, neElement string) {
 	f.elements = append(f.elements[:indexOperator], f.elements[indexOperatorP1:]...)
 	f.elements = append(f.elements[:indexOperator], f.elements[indexOperatorP1:]...)
 }
-
-func (f FractionsOperations) DisplayResult(operation string) string {
-	return "displayResult"
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
