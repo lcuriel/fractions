@@ -37,22 +37,33 @@ func (f FractionsOperations) CleanString(operation string) string{
 	return operation
 }
 
+
 func (f FractionsOperations) Execute(operation string) string{
 	result := ""
 	f.elements = strings.Split(operation, " ")
-	operators := [4]string{"*", "/", "+", "-"}
-	for i:=0; i< len(operators); i++{
-		for {
-			indexOperator := f.indexOf(f.elements, operators[i])
-			if indexOperator >= 0 {
-				element1, element2 := f.getElements(indexOperator)
-				result = f.doOperation(operators[i], element1, element2)
-				f.newArray(f.elements, result)
+	bo := new(BasicOperations)
+	if len(f.elements)==1 {
+		result = bo.IntegerToFraction(f.elements[0])
+		result = bo.Reduce(result)
+		fmt.Println("REDUCED: ", result)
+	} else {
+		operators := [4]string{"*", "/", "+", "-"}
+		for i:=0; i< len(operators); i++{
+			for {
+				f.newEntryLog()
+				indexOperator := f.indexOf(f.elements, operators[i])
+				if indexOperator >= 0 {
+					element1, element2 := f.getElements(indexOperator)
+					result = f.doOperation(operators[i], element1, element2)
+					f.newArray(indexOperator, result)
+				} else {
+					break
+				}
 			}
-			break
 		}
+		result = f.elements[0]
 	}
-	return "execute"
+	return bo.Reduce(result)
 }
 
 func (f FractionsOperations) getElements(indexOperator int) (string, string) {
@@ -66,7 +77,6 @@ func (f FractionsOperations) doOperation(operator string, element1 string, eleme
 	var result string
 	element1 = bo.IntegerToFraction(element1)
 	element2 = bo.IntegerToFraction(element2)
-
 	switch operator{
 		case "*":
 			result = bo.Multiplication(element1, element2)
@@ -77,46 +87,6 @@ func (f FractionsOperations) doOperation(operator string, element1 string, eleme
 		case "-":
 			result = bo.Subtraction(element1, element2)
 	}
-	fmt.Println("ELEMENT1: ", element1)
-	fmt.Println("OPERATOR: ", operator)
-	fmt.Println("ELEMENT2: ", element2)
-	fmt.Println("RESULT: ", result)
-	fmt.Println("REDUCED: ", bo.Reduce(result))
-	fmt.Println("--------------------------------------------------------------------------------")
-	fmt.Println("--------------------------------------------------------------------------------")
-	fmt.Println("--------------------------------------------------------------------------------")
-	temp := ""
-	temp = "128/128"
-	fmt.Println(temp + ": ", bo.Reduce(temp))
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	temp = "512/32"
-	fmt.Println(temp + ": ", bo.Reduce(temp))
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	temp = "544/128"
-	fmt.Println(temp + ": ", bo.Reduce(temp))
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	temp = "480/128"
-	fmt.Println(temp + ": ", bo.Reduce(temp))
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	temp = "3/4"
-	fmt.Println(temp + ": ", bo.Reduce(temp))
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	temp = "9/12"
-	fmt.Println(temp + ": ", bo.Reduce(temp))
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-	fmt.Println("********************************************************************************")
-
 	return result
 }
 
@@ -128,14 +98,25 @@ func (f FractionsOperations) indexOf(vs []string, t string) int {
 	}
 	return -1
 }
+
+func (f FractionsOperations) newEntryLog(){
+	/*
+	lastPosition := len(f.tracking)
+	f.tracking[lastPosition] = strings.Join(f.elements, " ")
+	*/
+}
 /*
  ===================================================================================================
  ===================================================================================================
  ===================================================================================================
  ===================================================================================================
  */
-func (f FractionsOperations) newArray(operation []string, result string) string {
-	return "newArray"
+func (f *FractionsOperations) newArray(indexOperator int, neElement string) {
+	indexOperatorM1 := indexOperator - 1
+	indexOperatorP1 := indexOperator + 1
+	f.elements[indexOperatorM1] = neElement
+	f.elements = append(f.elements[:indexOperator], f.elements[indexOperatorP1:]...)
+	f.elements = append(f.elements[:indexOperator], f.elements[indexOperatorP1:]...)
 }
 
 func (f FractionsOperations) DisplayResult(operation string) string {

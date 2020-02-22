@@ -21,7 +21,7 @@ func main() {
 		operationArg = nil
 		if  fractionsOperations.IsValid(operation){
 			result := fractionsOperations.Execute(operation);
-			fractionsOperations.DisplayResult(result)
+			println(result)
 		} else {
 			fmt.Println("Specify a valid operation to be evaluated")
 		}

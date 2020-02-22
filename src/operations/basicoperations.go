@@ -1,8 +1,6 @@
 package operations
 
 import (
-	"fmt"
-	_ "fmt"
 	"strconv"
 	"strings"
 )
@@ -13,8 +11,6 @@ type FractionDestructured struct {
 }
 
 type BasicOperations struct {
-	element1 int
-	element2 int
 }
 
 func (bo BasicOperations) IntegerToFraction(element string) string {
@@ -22,13 +18,13 @@ func (bo BasicOperations) IntegerToFraction(element string) string {
 	if len(partsFraction) == 2 && len(partsFraction[1]) == 0 {
 		partsFraction = []string{partsFraction[0]}
 	}
-	if strings.Contains(partsFraction[0], "/") { 	// element ==> FRACTION (3/4, 1/2, etc)
+	if strings.Contains(partsFraction[0], "/") {   // element ==> FRACTION (3/4, 1/2, etc)
 		return element
 	}
-	if len(partsFraction) == 1 {	// element ==> INTEGER (5_, 666_, 999_)
+	if len(partsFraction) == 1 {                          // element ==> INTEGER (5_, 666_, 999_)
 		return  partsFraction[0]+"/1"
 	}
-	integer, _ := strconv.Atoi(partsFraction[0])	// element ==> INTEGER-FRACTION (5_3/4, 1_2/3, 1243_234234/233467)
+	integer, _ := strconv.Atoi(partsFraction[0])          // element ==> INTEGER-FRACTION (5_3/4, 1_2/3, 124_234/233)
 	partsFraction = strings.Split(partsFraction[1], "/")
 	numerator, _ := strconv.Atoi(partsFraction[0])
 	denominator, _ := strconv.Atoi(partsFraction[1])
@@ -80,26 +76,7 @@ func (bo BasicOperations) fractionDestructuring(element string) FractionDestruct
 	return FractionDestructured{ numerator: numerator, denominator: denominator }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 func (bo BasicOperations) Reduce(element string) string {
-	fmt.Println("ORIGINAL: ", element)
 	integer := 0
 	result := ""
 	e := bo.fractionDestructuring(element)
@@ -133,20 +110,3 @@ func (bo BasicOperations) findDivisor(element FractionDestructured) int {
 	}
 	return result
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
