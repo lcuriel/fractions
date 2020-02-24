@@ -3,14 +3,14 @@
    
    Assumptions 
    - Valid operators shall be *, /, +, - (multiply, division, addition and subtract)
-   - Operands and operators shall be separated by one or more spaces. the command has the ability to eliminate unnecessary spaces
+   - Operands and operators shall be separated by one or more spaces. The command has the ability to eliminate unnecessary spaces
    - Operand is defined by, later it will be explained more thoroughly by regular expressions: 
       + Single whole. 3_ 345_
       + Fraction 2/5 54/535
       + Mixed numbers 5_55/67
-  - When is passed a single operand, the command calculate a reduction. By example: 44_56/5
+  - When is passed a single operand, the command calculate a reduction. By example if the input is 44_56/5 the command will return 55_1/5 
 
-   
+### DEFINITIONS   
 ###### INTEGER
     An integer is a number that can be written without a fractional component and is greater than.
 	[1-9]\d*\_
