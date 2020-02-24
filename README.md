@@ -75,7 +75,7 @@ INPUT | RESULT
 ./fractions "20/5"                                                                                                      | 4_
 ./fractions "341156172/28576800"                                                                                        | 11_319183/340200
 ./fractions "5_ * 4/5"                                                                                                  | 4_
-./fractions "5_1/3          * 4/5"                                                                                               | 4_4/15
+./fractions "5_1/3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 4/5"                                                                                               | 4_4/15
 ./fractions "5_6/6 * 4_3/4"                                                                                             | 28_1/2
 ./fractions "1/4 * 1/8 / 1/2 + 1/16 - 1/32 * 1/64"                                                                      | 255/2048
 ./fractions "90/12 / 3_ / 7_ / 40/83 / 4_ / 70/97 / 8_4/6 / 3_ / 5/24 / 9_5/34 / 5_9/21"                                | 410601/430175200
