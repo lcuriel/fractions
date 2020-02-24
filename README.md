@@ -88,5 +88,6 @@ INPUT | RESULT
 ### COMPILING TO DIFFERENTS OS
     # OSX
     GOOS=darwin GOARCH=386 go build fractions.go
+    
     # LINUX
     GOOS=linux GOARCH=arm go build fractions.go
