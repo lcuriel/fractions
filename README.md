@@ -69,7 +69,7 @@
 
 
 ### Examples of use
-| INPUT | RESULT |
+INPUT | RESULT
 :--- | ---:
 ./fractions "11_"                                                                                                       | 11_
 ./fractions "20/5"                                                                                                      | 4_
