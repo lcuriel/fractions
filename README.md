@@ -86,7 +86,7 @@ INPUT | RESULT
 ./fractions "5_ * 4/5 * 6/97 * 9_3/7 * 5/4 * 6_ * 4/87 + 5_6/12 * 40_  * 8/75 * 6_10/27 * 8/64 * 8/5 * 2_1/8 * 60_1/9"  | 3819_320603111/358868475
 
 ### COMPILING TO DIFFERENTS OS
-`
-GOOS=darwin GOARCH=386 go build fractions.go
-env GOOS=linux GOARCH=arm GOARM=7 go build fractions.go
-`
+    # OSX
+    GOOS=darwin GOARCH=386 go build fractions.go
+    # LINUX
+    GOOS=linux GOARCH=arm go build fractions.go
