@@ -84,3 +84,9 @@ INPUT | RESULT
 ./fractions "1/2 + 3/4 * 5_34/345 / 3_ * 55/123 + 33_4/34 + 343_ / 33_4/13 * 23/66 - 33_ * 1/3 + 33_"                   | 22_151883/8097100
 ./fractions "30_ + 1_7/48 + 6/38 + 47_2/594 + 3_8/7 + 10_2/96 + 5/42 + 33_ + 4_ + 3/60 + 9_ + 5/67"                     | 138_37817327/52931340
 ./fractions "5_ * 4/5 * 6/97 * 9_3/7 * 5/4 * 6_ * 4/87 + 5_6/12 * 40_  * 8/75 * 6_10/27 * 8/64 * 8/5 * 2_1/8 * 60_1/9"  | 3819_320603111/358868475
+
+### COMPILING TO DIFFERENTS OS
+`
+GOOS=darwin GOARCH=386 go build fractions.go
+env GOOS=linux GOARCH=arm GOARM=7 go build fractions.go
+`
