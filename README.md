@@ -77,7 +77,7 @@ INPUT | RESULT
 ./fractions "5_ * 4/5"                                                                                                  | 4_
 ./fractions "5_1/3 * 4/5"                                                                                               | 4_4/15
 ./fractions "5_6/6 * 4_3/4"                                                                                             | 28_1/2
-./fractions "1/4 &nbsp;&nbsp;&nbsp * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1/8 &nbsp;&nbsp;&nbsp;&nbsp; / 1/2 &nbsp;&nbsp;&nbsp;&nbsp; + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1/16 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1/32 * 1/64"                                                                      | 255/2048
+./fractions "1/4 &nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1/8 &nbsp;&nbsp;&nbsp;&nbsp; / 1/2 &nbsp;&nbsp;&nbsp;&nbsp; + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1/16 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1/32 * 1/64"                                                                      | 255/2048
 ./fractions "90/12 / 3_ / 7_ / 40/83 / 4_ / 70/97 / 8_4/6 / 3_ / 5/24 / 9_5/34 / 5_9/21"                                | 410601/430175200
 ./fractions "5_ - 9_3/48 - 6/5 - 98_7/9 - 63_4/59 - 3/240 - 5/98 - 3_4/8 - 4_3/8 - 5/6"                                 | -202437322260480/1150997299200
 ./fractions "40_ / 2/67 * 6/5 / 40_1/2 - 9_5/6 + 2/50 * 1_ - 2_8/7 / 6/5 - 40/12 * 7/8 - 5/6 + 1_3/24"                  | 10_69617/340200
