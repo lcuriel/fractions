@@ -1,9 +1,9 @@
 package operations
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
-	_ "reflect"
 )
 
 
@@ -17,7 +17,7 @@ func (f *FractionsOperations) IsValid(operation string) bool {
 	band := false
 	operation = f.CleanString(operation)
 	if len(operation) > 1 {
-		expression := `^(([1-9]\d*\_)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*))(\s(\*|\/|\+|\-)\s(([1-9]\d*\_)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*)))*$`
+		expression := `^(([1-9]\d*)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*))(\s(\*|\/|\+|\-)\s(([1-9]\d*)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*)))*$`
 		rsEvaluator, _ := regexp.Compile(expression)
 		band = rsEvaluator.MatchString(operation)
 	}
@@ -36,7 +36,7 @@ func (f FractionsOperations) CleanString(operation string) string{
 	return operation
 }
 
-func (f FractionsOperations) Execute(operation string) string{
+func (f *FractionsOperations) Execute(operation string) string{
 	result := ""
 	f.elements = strings.Split(operation, " ")
 	bo := new(BasicOperations)
@@ -96,13 +96,27 @@ func (f FractionsOperations) indexOf(vs []string, t string) int {
 	return -1
 }
 
-func (f FractionsOperations) newEntryLog(){
+func (f *FractionsOperations) newEntryLog(){
+	newString := strings.Join(f.elements, " ")
+	f.tracking = append(f.tracking, newString)
 }
 
-func (f *FractionsOperations) newArray(indexOperator int, neElement string) {
+func (f *FractionsOperations) GetLog() []string {
+	return f.tracking
+}
+
+func (f *FractionsOperations) PrintLog(log bool) {
+	if log {
+		for i:=0; i < len(f.tracking); i++ {
+			fmt.Println(i, " => ", f.tracking[i])
+		}
+	}
+}
+
+func (f *FractionsOperations) newArray(indexOperator int, newElement string) {
 	indexOperatorM1 := indexOperator - 1
 	indexOperatorP1 := indexOperator + 1
-	f.elements[indexOperatorM1] = neElement
+	f.elements[indexOperatorM1] = newElement
 	f.elements = append(f.elements[:indexOperator], f.elements[indexOperatorP1:]...)
 	f.elements = append(f.elements[:indexOperator], f.elements[indexOperatorP1:]...)
 }
