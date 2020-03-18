@@ -17,7 +17,7 @@ func (f *FractionsOperations) IsValid(operation string) bool {
 	band := false
 	operation = f.CleanString(operation)
 	if len(operation) > 1 {
-		expression := `^(([1-9]\d*)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*))(\s(\*|\/|\+|\-)\s(([1-9]\d*)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*)))*$`
+		expression := `^((\-?[1-9]\d*)|(\-?[1-9]\d*\/\-?[1-9]\d*)|(\-?[1-9]\d*\_\-?[1-9]\d*\/\-?[1-9]\d*))(\s(\*|\/|\+|\-)\s((\-?[1-9]\d*)|(\-?[1-9]\d*\/\-?[1-9]\d*)|(\-?[1-9]\d*\_\-?[1-9]\d*\/\-? [1-9]\d*)))*$`
 		rsEvaluator, _ := regexp.Compile(expression)
 		band = rsEvaluator.MatchString(operation)
 	}
