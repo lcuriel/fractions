@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"fractions/src/operations"
 	"testing"
 )
@@ -14,12 +13,9 @@ func TestIsValidOneElement(t *testing.T){
 	testCases := []string{ "-3/5", "3/-5", "-3/-5", "1", "-1", "1/1", "1_-3/5", "1_3/-5", "1_-3/-5", "-1_-3/5", "-1_3/-5", "-1_-3/-5" }
 	fractionsOperations := new(operations.FractionsOperations)
 	for i:=0; i< len(testCases); i++{
-		fmt.Println(testCases[i])
-		fmt.Println(fractionsOperations.IsValid(testCases[i]))
-		fmt.Println("----------------------------------------------------------------------")
 		result = fractionsOperations.IsValid(testCases[i])
 		if result != expected {
-			//t.Errorf("Element: %s, result:%t want: %t.", testCases[i], result, expected)
+			t.Errorf("Element: %s, result:%t want: %t.", testCases[i], result, expected)
 		}
 	}
 }
