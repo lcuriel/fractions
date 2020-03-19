@@ -73,6 +73,11 @@ func (bo BasicOperations) fractionDestructuring(element string) FractionDestruct
 	partsFraction := strings.Split(element, "/")
 	numerator, _ := strconv.Atoi(partsFraction[0])
 	denominator, _ := strconv.Atoi(partsFraction[1])
+
+	if numerator < 0 &&  denominator < 0 {
+		numerator = bo.AbsoluteValue(numerator)
+		denominator = bo.AbsoluteValue(denominator)
+	}
 	return FractionDestructured{ numerator: numerator, denominator: denominator }
 }
 
@@ -80,19 +85,28 @@ func (bo BasicOperations) Reduce(element string) string {
 	integer := 0
 	result := ""
 	e := bo.fractionDestructuring(element)
-	if (e.numerator > e.denominator) || (e.numerator == e.denominator) {
+
+	if (bo.AbsoluteValue(e.numerator) > bo.AbsoluteValue(e.denominator)) || (bo.AbsoluteValue(e.numerator) == bo.AbsoluteValue(e.denominator)) {
 		integer = int(e.numerator / e.denominator)
 		e.numerator = e.numerator - (integer * e.denominator)
-		result = strconv.Itoa(integer) + "_"
+		result = strconv.Itoa(integer)
 		if e.numerator == 0 {
 			return result
 		}
+		result = result + "_"
 	}
 	divisor := bo.findDivisor(e)
 	e.numerator = e.numerator / divisor
 	e.denominator = e.denominator / divisor
 	result = result + strconv.Itoa(e.numerator) + "/" + strconv.Itoa(e.denominator)
 	return result
+}
+
+func (bo BasicOperations) AbsoluteValue(number int) int{
+	if number < 0 {
+		number = number * -1
+	}
+	return number
 }
 
 func (bo BasicOperations) findDivisor(element FractionDestructured) int {
