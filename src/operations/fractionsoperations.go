@@ -16,8 +16,8 @@ type FractionsOperations struct {
 func (f *FractionsOperations) IsValid(operation string) bool {
 	band := false
 	operation = f.CleanString(operation)
-	if len(operation) > 1 {
-		expression := `^(([1-9]\d*)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*))(\s(\*|\/|\+|\-)\s(([1-9]\d*)|([1-9]\d*\/[1-9]\d*)|([1-9]\d*\_[1-9]\d*\/[1-9]\d*)))*$`
+	if len(operation) >= 1 {
+		expression := `^((\-?[1-9]\d*)|(\-?[1-9]\d*\/\-?[1-9]\d*)|(\-?[1-9]\d*\_\-?[1-9]\d*\/\-?[1-9]\d*))(\s(\*|\/|\+|\-)\s((\-?[1-9]\d*)|(\-?[1-9]\d*\/\-?[1-9]\d*)|(\-?[1-9]\d*\_\-?[1-9]\d*\/\-?[1-9]\d*)))*$`
 		rsEvaluator, _ := regexp.Compile(expression)
 		band = rsEvaluator.MatchString(operation)
 	}
@@ -47,7 +47,7 @@ func (f *FractionsOperations) Execute(operation string) string{
 		operators := [4]string{"*", "/", "+", "-"}
 		for i:=0; i< len(operators); i++{
 			for {
-				f.newEntryLog()
+				f.newEntryLog(operators[i])
 				indexOperator := f.indexOf(f.elements, operators[i])
 				if indexOperator >= 0 {
 					element1, element2 := f.getElements(indexOperator)
@@ -96,8 +96,9 @@ func (f FractionsOperations) indexOf(vs []string, t string) int {
 	return -1
 }
 
-func (f *FractionsOperations) newEntryLog(){
+func (f *FractionsOperations) newEntryLog(operator string){
 	newString := strings.Join(f.elements, " ")
+	newString = "Current operator: '" + operator + "'  Element: " + newString
 	f.tracking = append(f.tracking, newString)
 }
 
