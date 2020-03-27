@@ -19,8 +19,8 @@ func main() {
 		operationArg = nil
 		if  fractionsOperations.IsValid(operation){
 			result := fractionsOperations.Execute(operation)
-			println(result)
 			fractionsOperations.PrintLog(log)
+			fmt.Println("The result is: ", result)
 		} else {
 			fmt.Println("Specify a valid operation to be evaluated")
 		}
