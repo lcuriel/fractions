@@ -9,7 +9,6 @@
       + Fraction 2/5 54/535
       + Mixed numbers 5_55/67
   - When is passed a single operand, the command calculate a reduction. By example if the input is 44_56/5 the command will return 55_1/5
-  - [TEST](#examples-of-use)
   
 ###### UPDATE
 In this version it was added 
